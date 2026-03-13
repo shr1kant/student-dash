@@ -40,12 +40,11 @@ PERSONA_PALETTE = {
     'Developing Strivers':   '#3B82F6',
 }
 
-# Base layout — only truly global settings, no margin/axes (those vary per chart)
+# Base layout — only truly global settings, no margin/axes/legend (those vary per chart)
 PLOTLY_LAYOUT = dict(
     paper_bgcolor='rgba(0,0,0,0)',
     plot_bgcolor='rgba(0,0,0,0)',
     font=dict(family='DM Sans, sans-serif', color=COLORS['text'], size=12),
-    legend=dict(bgcolor='rgba(0,0,0,0)', borderwidth=0),
     title_font=dict(size=14, color=COLORS['text']),
 )
 
@@ -53,11 +52,33 @@ PLOTLY_LAYOUT = dict(
 AXIS_STYLE = dict(gridcolor=COLORS['faint'], linecolor=COLORS['border'],
                   tickfont=dict(color=COLORS['muted']))
 
-def apply_theme(fig, title='', height=400):
-    fig.update_layout(**PLOTLY_LAYOUT, title=title, height=height)
-    fig.update_xaxes(**AXIS_STYLE)
-    fig.update_yaxes(**AXIS_STYLE)
+def theme(fig, title='', height=400, margin=None, xaxis_title='', yaxis_title='', legend=None, **extra):
+    """Single helper — replaces all **PLOTLY_LAYOUT unpacking across pages."""
+    kwargs = dict(
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        font=dict(family='DM Sans, sans-serif', color=COLORS['text'], size=12),
+        title_font=dict(size=14, color=COLORS['text']),
+        title=title,
+        height=height,
+        margin=margin or dict(l=10, r=10, t=48, b=10),
+    )
+    if xaxis_title:
+        kwargs['xaxis_title'] = xaxis_title
+    if yaxis_title:
+        kwargs['yaxis_title'] = yaxis_title
+    if legend is not None:
+        kwargs['legend'] = legend
+    kwargs.update(extra)
+    fig.update_layout(**kwargs)
+    fig.update_xaxes(gridcolor=COLORS['faint'], linecolor=COLORS['border'],
+                     tickfont=dict(color=COLORS['muted']))
+    fig.update_yaxes(gridcolor=COLORS['faint'], linecolor=COLORS['border'],
+                     tickfont=dict(color=COLORS['muted']))
     return fig
+
+# Keep apply_theme as alias
+apply_theme = theme
 
 GLOBAL_CSS = """
 <style>
