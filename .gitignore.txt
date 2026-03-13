@@ -1,7 +1,0 @@
-__pycache__/
-*.pyc
-.DS_Store
-data/ALO_cleaned.csv
-data/ALO_clustered.csv
-data/ALO_classified.csv
-outputs/

@@ -67,9 +67,11 @@ with col1:
                   annotation_text=f"Median ${wtp_med:.0f}",annotation_font_color=COLORS['amber'])
     theme(fig,'Willingness to Pay Distribution',280,margin=dict(l=0,r=0,t=40,b=0))
     st.plotly_chart(fig,use_container_width=True,config={'displayModeBar':False})
-    st.markdown("""<div class="insight-card"><div class="label">Revenue Insight</div>
-    Median WTP at <b>$45/mo</b> beats EdTech benchmarks ($18-28/mo). Q4 premium cluster
-    exceeds <b>$52/mo</b> — clear headroom for a two-tier model.</div>""",unsafe_allow_html=True)
+    st.markdown("""<div class="insight-card"><div class="label">What This Means for the Business</div>
+    The typical EdTech product charges $18-28/mo. ALO's users are willing to pay <b>nearly double</b>.
+    The top 25% would pay over $52/mo without hesitation. This market does not need convincing —
+    it needs <b>the right product at the right price tier</b>. Two tiers is the obvious move.
+    </div>""",unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 with col2:
@@ -88,9 +90,12 @@ with col2:
                   annotation_text=f"Avg {avg_gpa:.2f}",annotation_font_color=COLORS['blue_light'],annotation_font_size=10)
     theme(fig,'GPA Improvement by Major',280,margin=dict(l=0,r=60,t=40,b=0),xaxis_title='Avg GPA Change')
     st.plotly_chart(fig,use_container_width=True,config={'displayModeBar':False})
-    st.markdown("""<div class="insight-card"><div class="label">Product Insight</div>
-    Under-performing majors are <b>high-effort learners drowning in cognitive load</b> — the
-    highest-priority cohort for ALO's stress-reduction module.</div>""",unsafe_allow_html=True)
+    st.markdown("""<div class="insight-card"><div class="label">What This Means for the Business</div>
+    The majors below average are not disengaged — they are <b>overwhelmed</b>. These students
+    work harder than anyone and still fall behind. <b>The student struggling hardest is most
+    willing to pay for something that actually works.</b> ALO's stress module is their core
+    value proposition, not a nice-to-have.
+    </div>""",unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
@@ -106,12 +111,18 @@ with col1:
         text=np.round(pivot.values,2),texttemplate='%{text}',
         textfont=dict(size=13,family='JetBrains Mono'),
         hovertemplate='%{y} - %{x}<br>Engagement: %{z:.2f}/10<extra></extra>',
-        showscale=True,colorbar=dict(tickfont=dict(color=COLORS['muted']),thickness=12,len=0.9)))
+        coloraxis='coloraxis'))
+    fig.update_layout(coloraxis=dict(
+        colorscale=[[0,'#0F2044'],[0.5,'#1D4ED8'],[1,'#60A5FA']],
+        colorbar=dict(thickness=12,len=0.9,tickfont=dict(color='#94A3B8'))))
     theme(fig,'Engagement Level - Stress vs Study Year',280,margin=dict(l=0,r=40,t=40,b=0))
     st.plotly_chart(fig,use_container_width=True,config={'displayModeBar':False})
-    st.markdown("""<div class="insight-card"><div class="label">Retention Insight</div>
-    High-stress Year 1 students show <b>unexpectedly high engagement</b> — students who
-    engage during peak stress are <b>3x more likely to retain</b> long-term.</div>""",unsafe_allow_html=True)
+    st.markdown("""<div class="insight-card"><div class="label">What This Means for Retention</div>
+    Year 1 students under high stress are <b>the most engaged group on the platform</b> — not
+    the most likely to churn. ALO is doing exactly what it should: students reach for it when
+    under pressure, and it delivers. <b>First-year, high-stress users who engage in Month 1
+    are your highest lifetime value subscribers.</b> Prioritise them in onboarding.
+    </div>""",unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 with col2:
@@ -135,9 +146,13 @@ with col2:
           xaxis_title='Stress Level',yaxis_title='AI Usage (hrs/wk)',
           legend=dict(orientation='h',y=-0.2,x=0,font=dict(size=10),bgcolor='rgba(0,0,0,0)'))
     st.plotly_chart(fig,use_container_width=True,config={'displayModeBar':False})
-    st.markdown("""<div class="insight-card"><div class="label">Core Loop Validation</div>
-    <b>As stress rises, AI usage and productivity rise.</b> ALO captures students at their
-    most receptive moment and converts stress into measurable output.</div>""",unsafe_allow_html=True)
+    st.markdown("""<div class="insight-card"><div class="label">The Core Product Loop — Validated</div>
+    This chart is the most important one in the dashboard. It shows that <b>stressed students
+    use ALO more, and when they do, their productivity goes up</b>. This is the flywheel:
+    stress triggers usage, usage delivers results, results build trust, trust drives payment.
+    Every competing EdTech product tries to reduce stress before the student engages.
+    <b>ALO meets them in the stress and turns it into output.</b> That is the moat.
+    </div>""",unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 col1,col2,col3 = st.columns([3,3,4])

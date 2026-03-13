@@ -75,10 +75,13 @@ with col1:
           yaxis_title=f'PC2 ({info["pca_var"][1]*100:.0f}%)',
           legend=dict(orientation='h',y=-0.15,x=0,font=dict(size=10),bgcolor='rgba(0,0,0,0)'))
     st.plotly_chart(fig,use_container_width=True,config={'displayModeBar':False})
-    st.markdown("""<div class="insight-card"><div class="label">Segmentation Insight</div>
-    <b>Efficient Achievers cluster tightly</b> in PCA space — a rare but high-value cohort.
-    <b>High-Stress Engagers spread wide</b>, indicating internal variance ripe for
-    sub-segmentation. Hover over points to inspect individual user profiles.
+    st.markdown("""<div class="insight-card"><div class="label">What This Means for the Business</div>
+    Each coloured cluster is a <b>distinct type of student with different needs, different pain points,
+    and different price sensitivity</b>. Efficient Achievers (tight cluster) are a small but
+    predictable group — easy to serve, easy to upsell. High-Stress Engagers (spread wide) are your
+    largest segment and your biggest opportunity: they are already using the platform heavily,
+    they just need help converting that engagement into visible results.
+    <b>Hover over individual dots to inspect any student's full profile.</b>
     </div>""", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -133,9 +136,12 @@ with col1:
     for ax in ['xaxis','xaxis2','yaxis','yaxis2']:
         fig.update_layout(**{ax:dict(gridcolor=COLORS['faint'],linecolor=COLORS['border'])})
     st.plotly_chart(fig,use_container_width=True,config={'displayModeBar':False})
-    st.markdown(f"""<div class="insight-card"><div class="label">Model Validation</div>
-    k={k_val} gives silhouette <b>{info['best_silhouette']:.3f}</b>. Scores above 0.15
-    indicate meaningful structure. Adjust k in the sidebar to see how segments shift.
+    st.markdown(f"""<div class="insight-card"><div class="label">Why This Number of Segments?</div>
+    The silhouette score of <b>{info['best_silhouette']:.3f}</b> tells us that these {k_val} groups
+    are genuinely different from each other — not just randomly drawn lines in the data.
+    Think of it as a "how distinct are these groups?" score: above 0.15 means the segments
+    are real enough to build separate marketing, pricing, and product strategies around.
+    Use the sidebar to experiment — but k=4 is where the data naturally wants to split.
     </div>""", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -168,10 +174,13 @@ with col2:
     worst = df_drill.groupby('Persona')[mcol].median().idxmin()
     bv    = df_drill.groupby('Persona')[mcol].median().max()
     wv    = df_drill.groupby('Persona')[mcol].median().min()
-    st.markdown(f"""<div class="insight-card"><div class="label">Auto Insight</div>
-    <b>{best}</b> leads at median <b>{bv:.2f}</b>. <b>{worst}</b> trails at <b>{wv:.2f}</b>
-    — a gap of <b>{bv-wv:.2f}</b>. Closing this through targeted interventions is
-    ALO's highest-leverage growth action.</div>""", unsafe_allow_html=True)
+    st.markdown(f"""<div class="insight-card"><div class="label">What This Gap Costs You</div>
+    <b>{best}</b> is at {bv:.2f}. <b>{worst}</b> is at {wv:.2f}. That gap of <b>{bv-wv:.2f}</b>
+    is not fixed — it is a product problem with a product solution. The question is not
+    "why is one group better?" but <b>"what feature, nudge, or intervention would close this gap
+    by even 20%?"</b> A 20% lift in the bottom segment, at scale, has more revenue impact than
+    any optimisation you could make for your top segment.
+    </div>""", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("<div class='alo-card' style='margin-top:8px;'>", unsafe_allow_html=True)

@@ -63,10 +63,13 @@ with col1:
           legend=dict(x=0.4,y=0.12,font=dict(size=11),bgcolor='rgba(0,0,0,0)'))
     st.plotly_chart(fig,use_container_width=True,config={'displayModeBar':False})
     idx = np.argmin(np.abs(np.array(lr['fpr'])-0.3))
-    st.markdown(f"""<div class="insight-card"><div class="label">Model Insight</div>
-    At 30% false positive rate, LR captures <b>{lr['tpr'][idx]*100:.0f}% of all high-WTP users</b>.
-    For a 200-user campaign, that means ~{int(200*lr['tpr'][idx])} genuine conversions —
-    strong signal for CAC-efficient growth.</div>""", unsafe_allow_html=True)
+    st.markdown(f"""<div class="insight-card"><div class="label">What This Means for Growth</div>
+    If you ran a targeted upgrade campaign to 200 users, this model would correctly identify
+    <b>~{int(200*lr['tpr'][idx])} genuine high-paying users</b> — without requiring any manual
+    review. That is the difference between <b>spray-and-pray marketing</b> and a precision
+    conversion engine. At a {wtp_med:.0f}/mo price point, those {int(200*lr['tpr'][idx])} conversions
+    represent <b>${int(200*lr['tpr'][idx]*wtp_med*12):,} in annualised revenue</b> from a single campaign.
+    </div>""", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 with col2:
@@ -117,10 +120,14 @@ with col1:
           margin=dict(l=0,r=70,t=40,b=0),xaxis_title='Gini Importance')
     st.plotly_chart(fig,use_container_width=True,config={'displayModeBar':False})
     top3=res['importances'].head(3).index.str.replace('_',' ').tolist()
-    st.markdown(f"""<div class="insight-card"><div class="label">Monetisation Signal</div>
-    <b>{top3[0]}, {top3[1]}, {top3[2]}</b> are the top predictors — all outcome variables,
-    not demographics. <b>Students pay when they see results.</b> This validates a
-    results-first, paywall-second product strategy.</div>""", unsafe_allow_html=True)
+    st.markdown(f"""<div class="insight-card"><div class="label">What This Means for Pricing Strategy</div>
+    The top payment predictors are <b>outcome metrics, not demographics</b>: {top3[0]}, {top3[1]},
+    and {top3[2]}. Students do not pay because they are in Year 3 or studying Engineering.
+    <b>They pay when the product has already worked for them.</b> This is your pricing strategy
+    in one sentence: show results first, charge second. A 14-day free trial is not a cost —
+    it is a conversion mechanism. Every student who sees a GPA improvement during their trial
+    is a paying subscriber waiting to happen.
+    </div>""", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
 with col2:
