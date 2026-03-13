@@ -32,14 +32,16 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
     st.markdown("""
-    <div style="font-size:0.7rem; text-transform:uppercase; letter-spacing:0.12em; color:#475569; margin-bottom:8px;">Navigation</div>
+    <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:#475569;margin-bottom:10px;">Navigation</div>
+    <div style="font-size:0.82rem;color:#64748B;line-height:2;">
+        &nbsp;&nbsp;◇ Executive Overview<br>
+        &nbsp;&nbsp;◇ User Segments<br>
+        &nbsp;&nbsp;◇ Revenue Intelligence<br>
+        &nbsp;&nbsp;◇ Behaviour Patterns<br>
+        &nbsp;&nbsp;◇ Performance Drivers
+    </div>
+    <div style="font-size:0.72rem;color:#334155;margin-top:8px;">Use the sidebar menu above to navigate.</div>
     """, unsafe_allow_html=True)
-
-    st.page_link("app.py",                               label="Executive Overview",      icon="◈")
-    st.page_link("pages/1_User_Segments.py",              label="User Segments",           icon="◉")
-    st.page_link("pages/2_Revenue_Intelligence.py",       label="Revenue Intelligence",    icon="◈")
-    st.page_link("pages/3_Behaviour_Patterns.py",         label="Behaviour Patterns",      icon="◆")
-    st.page_link("pages/4_Performance_Drivers.py",        label="Performance Drivers",     icon="▲")
 
     st.markdown("""
     <div style="border-top:1px solid #1E2D45; margin-top:20px; padding-top:16px;">
