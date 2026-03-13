@@ -180,6 +180,7 @@ with col2:
     </div>""", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
+display_df = rules_df[["antecedents","consequents","support","confidence","lift"]].round(3)
 with st.expander(f"Full Rule Table — all {len(rules_df)} rules"):
     st.dataframe(display_df, hide_index=True, use_container_width=True)
     st.download_button("Download rules CSV", rules_df.to_csv(index=False).encode(), "ALO_rules.csv", "text/csv")
