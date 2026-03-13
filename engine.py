@@ -40,19 +40,23 @@ PERSONA_PALETTE = {
     'Developing Strivers':   '#3B82F6',
 }
 
+# Base layout — only truly global settings, no margin/axes (those vary per chart)
 PLOTLY_LAYOUT = dict(
     paper_bgcolor='rgba(0,0,0,0)',
     plot_bgcolor='rgba(0,0,0,0)',
     font=dict(family='DM Sans, sans-serif', color=COLORS['text'], size=12),
-    margin=dict(l=10, r=10, t=48, b=10),
     legend=dict(bgcolor='rgba(0,0,0,0)', borderwidth=0),
-    xaxis=dict(gridcolor=COLORS['faint'], linecolor=COLORS['border'], tickfont=dict(color=COLORS['muted'])),
-    yaxis=dict(gridcolor=COLORS['faint'], linecolor=COLORS['border'], tickfont=dict(color=COLORS['muted'])),
     title_font=dict(size=14, color=COLORS['text']),
 )
 
+# Default axis style — apply per chart with update_xaxes/update_yaxes
+AXIS_STYLE = dict(gridcolor=COLORS['faint'], linecolor=COLORS['border'],
+                  tickfont=dict(color=COLORS['muted']))
+
 def apply_theme(fig, title='', height=400):
     fig.update_layout(**PLOTLY_LAYOUT, title=title, height=height)
+    fig.update_xaxes(**AXIS_STYLE)
+    fig.update_yaxes(**AXIS_STYLE)
     return fig
 
 GLOBAL_CSS = """
